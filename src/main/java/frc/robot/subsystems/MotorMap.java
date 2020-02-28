@@ -37,8 +37,9 @@ public class MotorMap extends SubsystemBase {
 
   }
 
-  ArrayList<deviceDescriptor> devices = new ArrayList<deviceDescriptor>();
+  ArrayList<deviceDescriptor> devices;
   public MotorMap() {
+    devices = new ArrayList<deviceDescriptor>();
     chooser = new SendableChooser<deviceDescriptor>();
   }
 
@@ -46,16 +47,27 @@ public class MotorMap extends SubsystemBase {
 
     for(int i = 0; i < devices.size(); i++){
         String motorKey = "motor "+(i+1);
-        if(devices[i].getType() == "Talon SRX"){
-          chooser.setDefaultOption(motorKey, WPI_TalonSRX(devices[i].getID()));
-        }
-        else if(devices[i].getType() == "Talon FX"){
-          chooser.setDefaultOption(motorKey, WPI_TalonFX(devices[i].getID()));
-        } 
+          chooser.setDefaultOption(motorKey, devices[i]);
+    }
+
+    while(chooser != null){
+      deviceDescriptor choosen = chooser.getSelected();
+      if(choosen.getType().equals("Talon SRX")){
+        WPI_TalonSRX choosenMotor = new WPI_TalonSRX(choosen.getID());
+      }
+      else{
+        WPI_TalonFX choosenMotor = new WPI_TalonFX(choosen.getID());
+      }
     }
   }
 
+
+
   public void discoverCanDevices() {
+    /**
+     * currently requires manual adding of motors to device descriptor list. 
+     * This will be fixed after basic functionality is demonstrated
+     */
     devices.add(new deviceDescriptor("Talon FX", 22));
     devices.add(new deviceDescriptor("Talon FX", 23));
     devices.add(new deviceDescriptor("Talon SRX", 24));
