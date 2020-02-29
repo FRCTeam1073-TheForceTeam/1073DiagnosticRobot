@@ -41,12 +41,13 @@ public class ExampleSubsystem extends SubsystemBase {
     chooser.setDefaultOption("Power", ControlMode.PercentOutput);
 
     ioController = new XboxController(0);
-    leftMotor = new WPI_TalonFX(24);
+    leftMotor = new WPI_TalonFX(6);
 
     leftMotor.configFactoryDefault();
     leftMotor.setSafetyEnabled(false);
     leftMotor.setNeutralMode(NeutralMode.Brake);
     leftMotor.configPeakOutputForward(1.0);
+    leftMotor.setInverted(true);
 
        /* leftMotorLeader.setInverted(true);
         leftMotorLeader.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
