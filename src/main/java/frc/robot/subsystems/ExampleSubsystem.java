@@ -31,12 +31,14 @@ public class ExampleSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
-  public ExampleSubsystem(diagDashboard _dashBoard, double _maxVelocity) {
-    dashBoard = _dashBoard;
+  public ExampleSubsystem(double _maxVelocity) {
+   // dashBoard = _dashBoard;
     maxVelocity = _maxVelocity;
     chooser = new SendableChooser();
     chooser.addOption("Power", ControlMode.PercentOutput);
     chooser.addOption("Velocity", ControlMode.Velocity);
+
+    chooser.setDefaultOption("Power", ControlMode.PercentOutput);
 
     ioController = new XboxController(0);
     leftMotor = new WPI_TalonFX(24);
