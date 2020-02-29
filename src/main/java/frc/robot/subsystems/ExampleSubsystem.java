@@ -82,7 +82,6 @@ public class ExampleSubsystem extends SubsystemBase {
    double signalInput = ioController.getRawAxis(1);
 
    SmartDashboard.putNumber("Signal Input", signalInput);
-   SmartDashboard.putNumber("Signal Input velocity", (siganlInput * maxVelocity));
    leftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     SmartDashboard.putNumber("position", leftMotor.getSelectedSensorPosition());
     SmartDashboard.putNumber("current", leftMotor.getSupplyCurrent());
