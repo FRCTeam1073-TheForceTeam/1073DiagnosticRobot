@@ -3,18 +3,31 @@
             "devices": {
                 "Falcon Flywheel 1": {
                     "canid": 22,
-                    "Type": "TalonFX"
+                    "Type": "TalonFX",
+                    "Sensors": {
+                        "encoder": "Mag Encoder"
+                    }
                 },
                 "Falcon Flywheel 2": {
                     "canid": 23,
-                    "Type": "TalonFX"
+                    "Type": "TalonFX",
+                    "Sensor": {
+                        "encoder": "Mag Encoder"
+                    }
                 },
                 "Hood Max Spark": {
                     "canid": 25,
-                    "Type": "MAXSpark"
+                    "Type": "MAXSpark",
+                    "Sensor": {
+                        "encoder": "NEO encoder"
+                    }
                 },
                 "Turret Talon": {
-                    "canid": 
+                    "canid": 24,
+                    "Type": "TalonSRX",
+                    "Sensor": {
+                        "encoder": "Mag Encoder"
+                    }
                 }
             }
         }
