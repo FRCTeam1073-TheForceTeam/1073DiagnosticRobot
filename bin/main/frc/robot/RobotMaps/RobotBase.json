@@ -2,16 +2,19 @@
         "canDevices": {
             "devices": {
                 "Falcon Flywheel 1": {
-
+                    "canid": 22,
+                    "Type": "TalonFX"
                 },
                 "Falcon Flywheel 2": {
-
+                    "canid": 23,
+                    "Type": "TalonFX"
                 },
                 "Hood Max Spark": {
-
+                    "canid": 25,
+                    "Type": "MAXSpark"
                 },
                 "Turret Talon": {
-                    
+                    "canid": 
                 }
             }
         }
