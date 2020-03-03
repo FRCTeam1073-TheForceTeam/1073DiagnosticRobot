@@ -25,11 +25,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ExampleSubsystem extends SubsystemBase {
 
   diagDashboard dashBoard;
-  private static WPI_TalonFX leftMotor;
+  private static WPI_TalonSRX leftMotor;
   private static XboxController ioController;
   private SendableChooser chooser;
   private double maxVelocity;
-  private static CANCoder encoder; 
 
 
   /**
@@ -38,23 +37,25 @@ public class ExampleSubsystem extends SubsystemBase {
   public ExampleSubsystem(diagDashboard _dashBoard, double _maxVelocity) {
     dashBoard = _dashBoard;
     maxVelocity = _maxVelocity;
+
     chooser = new SendableChooser();
-    encoder = new CANCoder(5);
     chooser.addOption("Power", ControlMode.PercentOutput);
     chooser.addOption("Velocity", ControlMode.Velocity);
 
     chooser.setDefaultOption("Power", ControlMode.PercentOutput);
 
     SmartDashboard.putData("Control Type", chooser);
+ 
 
     ioController = new XboxController(0);
-    leftMotor = new WPI_TalonFX(13);
-
+    leftMotor = new WPI_TalonSRX(13);
+    
     leftMotor.configFactoryDefault();
     leftMotor.setSafetyEnabled(false);
     leftMotor.setNeutralMode(NeutralMode.Brake);
     leftMotor.configPeakOutputForward(1.0);
     leftMotor.setInverted(true);
+    leftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
   @Override
@@ -63,18 +64,14 @@ public class ExampleSubsystem extends SubsystemBase {
    double signalInput = ioController.getRawAxis(1);
 
     SmartDashboard.putNumber("Signal Input", signalInput);
-    SmartDashboard.putNumber("position", encoder.getPosition());
+    SmartDashboard.putNumber("position", leftMotor.getSelectedSensorPosition());
     SmartDashboard.putNumber("current", leftMotor.getSupplyCurrent());
-    
-   if(chooser.getSelected().equals(ControlMode.PercentOutput)){
-    leftMotor.set(ControlMode.PercentOutput, signalInput);
-    SmartDashboard.putNumber("power output", leftMotor.get());
-   }
-   else if(chooser.getSelected().equals(ControlMode.Velocity)){
+    SmartDashboard.putNumber("velocity encoder feedback", leftMotor.getSelectedSensorVelocity());
+
+
      //Velocity takes a value in encoder ticks per 100 miliseconds
     leftMotor.set(ControlMode.Velocity, (signalInput*maxVelocity));
-    SmartDashboard.putNumber("velocity encoder feedback", encoder.getVelocity());
-   }
+
    
 
    /*HashMap<String, Double> hm = new HashMap();
